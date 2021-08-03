@@ -21,4 +21,4 @@ go version go1.15.6 darwin/amd64
 
 ## Running
 
-Run [main.go](cmd/echo-server/main.go)
+Run [main.go](src/cmd/echo-server/main.go)
