@@ -8,18 +8,20 @@ import (
 )
 
 func main() {
-	var server = NewServer(":8081")
+	//TODO fetch name from config or generate unique
+	var server = NewServer(":8081", "Server-1")
 	log.Fatal(server.Start())
 }
 
 type Server struct {
 	Port   string
+	Name   string
 	Router *mux.Router
 }
 
-func NewServer(port string) *Server {
-	s := Server{port, mux.NewRouter()}
-	configureRoutes(&s)
+func NewServer(port string, name string) *Server {
+	s := Server{port, name, mux.NewRouter()}
+	ConfigureRoutes(&s)
 	return &s
 }
 
@@ -28,13 +30,15 @@ func (s *Server) Start() error {
 	return http.ListenAndServe(s.Port, s.Router)
 }
 
-func configureRoutes(s *Server) {
-	s.Router.HandleFunc("/hello", HelloHandler).Methods("GET")
+func ConfigureRoutes(s *Server) {
+	s.Router.HandleFunc("/hello", HelloHandler(s.Name)).Methods("GET")
 }
 
-func HelloHandler(w http.ResponseWriter, r *http.Request) {
-	_, err := io.WriteString(w, "Hello, world!\n")
-	if err != nil {
-		log.Println("Error during handling response: ", err)
+func HelloHandler(name string) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		_, err := io.WriteString(w, name)
+		if err != nil {
+			log.Println("Error during handling response: ", err)
+		}
 	}
 }
