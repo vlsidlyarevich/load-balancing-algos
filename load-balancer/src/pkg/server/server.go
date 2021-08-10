@@ -26,5 +26,6 @@ func (s *Server) Start() error {
 }
 
 func (s *Server) RouteHandler(h RouteHandler) {
+	log.Println("Registering RouteHandler", h)
 	h.RegisterRoutes(s)
 }

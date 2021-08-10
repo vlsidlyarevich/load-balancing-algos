@@ -9,7 +9,7 @@ import (
 func main() {
 	var serv = server.NewServer(":8082")
 
-	serv.RouteHandler(proxy.SimpleBalancedProxy())
+	serv.RouteHandler(proxy.HelloBalancedProxy())
 
 	log.Fatal(serv.Start())
 }
