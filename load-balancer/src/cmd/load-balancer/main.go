@@ -7,9 +7,9 @@ import (
 )
 
 func main() {
-	var serv = server.NewServer(":8081")
+	var serv = server.NewServer(":8082")
 
-	serv.AddProxy(proxy.NewHelloProxy())
+	serv.RouteHandler(proxy.SimpleBalancedProxy())
 
 	log.Fatal(serv.Start())
 }

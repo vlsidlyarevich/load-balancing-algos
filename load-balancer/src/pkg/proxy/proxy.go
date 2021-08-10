@@ -1,38 +1,33 @@
 package proxy
 
 import (
-	"github.com/vlsidlyarevich/load-balancer/pkg/clients"
 	"github.com/vlsidlyarevich/load-balancer/pkg/server"
-	"io"
-	"log"
 	"net/http"
+	"net/http/httputil"
+	"net/url"
 )
 
-type Proxy interface {
-	RegisterRoutes(s *server.Server)
+func SimpleBalancedProxy() *BalancedProxy {
+	return new(BalancedProxy)
 }
 
-func NewHelloProxy() *HelloProxy {
-
-	return new(HelloProxy)
+type BalancedProxy struct {
 }
 
-type HelloProxy struct {
-	Client *clients.EchoClient
+func (p *BalancedProxy) RegisterRoutes(s *server.Server) {
+	s.Router.HandleFunc("/", proxyRequest(p))
 }
 
-func proxyHello(p *HelloProxy) http.HandlerFunc {
-
-	var response = p.Client.ForwardEcho()
+func proxyRequest(p *BalancedProxy) http.HandlerFunc {
+	server := getServer()
+	rProxy := httputil.NewSingleHostReverseProxy(server)
 
 	return func(w http.ResponseWriter, r *http.Request) {
-		_, err := io.WriteString(w, response)
-		if err != nil {
-			log.Println("Error during handling response: ", err)
-		}
+		rProxy.ServeHTTP(w, r)
 	}
 }
 
-func (p *HelloProxy) RegisterRoutes(s *server.Server) {
-	s.Router.HandleFunc("/hello", proxyHello(p)).Methods(http.MethodGet)
+func getServer() *url.URL {
+	parsedUrl, _ := url.Parse("http://127.0.0.1:8081")
+	return parsedUrl
 }

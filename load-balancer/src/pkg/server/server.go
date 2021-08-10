@@ -2,10 +2,13 @@ package server
 
 import (
 	"github.com/gorilla/mux"
-	"github.com/vlsidlyarevich/load-balancer/pkg/proxy"
 	"log"
 	"net/http"
 )
+
+type RouteHandler interface {
+	RegisterRoutes(s *Server)
+}
 
 type Server struct {
 	Port   string
@@ -22,6 +25,6 @@ func (s *Server) Start() error {
 	return http.ListenAndServe(s.Port, s.Router)
 }
 
-func (s *Server) AddProxy(p proxy.Proxy) {
-	p.RegisterRoutes(s)
+func (s *Server) RouteHandler(h RouteHandler) {
+	h.RegisterRoutes(s)
 }
