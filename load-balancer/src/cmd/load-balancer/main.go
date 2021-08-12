@@ -1,13 +1,13 @@
 package main
 
 import (
+	"github.com/vlsidlyarevich/load-balancer/pkg/application"
 	"github.com/vlsidlyarevich/load-balancer/pkg/proxy"
-	"github.com/vlsidlyarevich/load-balancer/pkg/server"
 	"log"
 )
 
 func main() {
-	var serv = server.NewServer(":8082")
+	var serv = application.NewApplication(":8082")
 
 	serv.RouteHandler(proxy.HelloBalancedProxy())
 
