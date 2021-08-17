@@ -10,21 +10,30 @@ type LoadBalancer interface {
 
 type RoundRobinLoadBalancer struct {
 	servers         []*Server
-	lastServedIndex int16
+	lastServedIndex int
 	//Mutex for locking NextServer
 	mutex sync.Mutex
 }
 
 func NewRoundRobinLoadBalancer() *RoundRobinLoadBalancer {
 	return &RoundRobinLoadBalancer{
-		servers: getServers(),
+		servers:         getServers(),
+		lastServedIndex: -1,
 	}
 }
 
 func (lb *RoundRobinLoadBalancer) NextServer() *Server {
 	lb.mutex.Lock()
 
+	if lb.lastServedIndex > len(lb.servers) {
+		lb.lastServedIndex = 0
+	}
+	server := lb.servers[lb.lastServedIndex]
+	lb.lastServedIndex++
+
 	defer lb.mutex.Unlock()
+
+	return server
 }
 
 func getServers() []*Server {
