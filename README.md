@@ -1,16 +1,14 @@
 # load-balancing-algos
 Load-balancing algos implementation.
 
-## Development plan
-
-1) Create echo server
-2) Teach echo server to echo with unique id
-3) Implement load balancer with simple round-robin and
-   hardcoded adresses
-4) Implement /health endpoint
-5) Implement POST /sick endpoint
-
-....TBD
+## Algorithms used:
+* Round-robin
+* Weighted round-robin (TBD)
+* Least Connection (TBD)
+* Fixed Weighting (TBD)
+* Weighted Response Time (TBD)
+* Source IP Hash (TBD)
+* URL Hash (TBD)
 
 ## Components
 * [Echo-server](echo-server/README.md)

@@ -1,6 +1,12 @@
 ## Echo server
 Simple go-written echo-server
 
+## Development plan
+1) Simple echo server
+2) Fetching name and port from config
+3) Implement /health endpoint
+TBD
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.

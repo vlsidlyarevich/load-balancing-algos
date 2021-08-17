@@ -1,6 +1,14 @@
 ## Echo server
 Simple go-written echo-server
 
+## Development plan
+1) Simple load balancer server with hardcoded servers
+2) Implement simple "Round robin" algo
+3) Fetch server list from config
+4) Implement "Weighted Round robin" algo
+5) Implement server health checks with goroutines
+TBD
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
