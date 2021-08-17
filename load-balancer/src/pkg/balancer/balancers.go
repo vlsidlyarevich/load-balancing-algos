@@ -1,12 +1,18 @@
 package balancer
 
+import (
+	"sync"
+)
+
 type LoadBalancer interface {
 	NextServer() *Server
 }
 
 type RoundRobinLoadBalancer struct {
-	servers []*Server
-	//TODO
+	servers         []*Server
+	lastServedIndex int16
+	//Mutex for locking NextServer
+	mutex sync.Mutex
 }
 
 func NewRoundRobinLoadBalancer() *RoundRobinLoadBalancer {
@@ -16,8 +22,9 @@ func NewRoundRobinLoadBalancer() *RoundRobinLoadBalancer {
 }
 
 func (lb *RoundRobinLoadBalancer) NextServer() *Server {
-	//TODO
-	panic("implement me")
+	lb.mutex.Lock()
+
+	defer lb.mutex.Unlock()
 }
 
 func getServers() []*Server {

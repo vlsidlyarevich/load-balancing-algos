@@ -14,6 +14,7 @@ Load-balancing algos implementation.
 
 ## Components
 * [Echo-server](echo-server/README.md)
+* [Load-balancer](load-balancer/README.md)
 
 ## Authors
 
