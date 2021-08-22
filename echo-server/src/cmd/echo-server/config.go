@@ -7,17 +7,21 @@ import (
 )
 
 type Config struct {
-	server ServerConf
+	Server ServerConf
 }
 
 type ServerConf struct {
-	port string `validate:"required" envconfig:"ECHO_SERVER_PORT"`
-	id   string `validate:"required" envconfig:"ECHO_SERVER_ID"`
+	Port string `validate:"required" envconfig:"ECHO_SERVER_PORT"`
+	Id   string `validate:"required" envconfig:"ECHO_SERVER_ID"`
 }
 
-func Load(path string) *Config {
+func LoadConfig(path string) *Config {
+	if path == "" {
+		log.Panicf("Invalid config path!")
+	}
+
 	var config Config
-	if _, err := toml.DecodeFile(path, config); err != nil {
+	if _, err := toml.DecodeFile(path, &config); err != nil {
 		log.Fatal(err)
 	}
 
@@ -29,7 +33,7 @@ func Load(path string) *Config {
 }
 
 func envOverride(c *Config) error {
-	err := envconfig.Process("echo-server", c)
+	err := envconfig.Process("ECHO_SERVER", c)
 	if err != nil {
 		return err
 	}

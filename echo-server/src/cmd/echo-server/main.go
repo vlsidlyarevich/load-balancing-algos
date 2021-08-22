@@ -7,9 +7,11 @@ import (
 	"net/http"
 )
 
+const ConfigPath = "conf/config.toml"
+
 func main() {
-	//TODO fetch name from config or generate unique
-	var server = NewServer(":8081", "Server-1")
+	var config = LoadConfig(ConfigPath)
+	var server = NewServer(config.Server.Port, config.Server.Id)
 	log.Fatal(server.Start())
 }
 
