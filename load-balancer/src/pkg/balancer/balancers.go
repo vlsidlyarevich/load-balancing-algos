@@ -25,7 +25,7 @@ func NewRoundRobinLoadBalancer() *RoundRobinLoadBalancer {
 func (lb *RoundRobinLoadBalancer) NextServer() *Server {
 	lb.mutex.Lock()
 
-	if lb.lastServedIndex > len(lb.servers) {
+	if lb.lastServedIndex >= len(lb.servers) {
 		lb.lastServedIndex = 0
 	}
 	server := lb.servers[lb.lastServedIndex]

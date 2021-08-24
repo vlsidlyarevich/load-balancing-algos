@@ -23,10 +23,9 @@ func (p *HelloProxy) RegisterRoutes(s *application.Application) {
 }
 
 func proxyRequest(p *HelloProxy) http.HandlerFunc {
-	server := p.lb.NextServer()
-
 	return func(rw http.ResponseWriter, req *http.Request) {
 		log.Println("Proxying request:", req.Method, req.RequestURI, req.Body)
+		server := p.lb.NextServer()
 		log.Println("Selected server:", server)
 		server.ServeRequest(rw, req)
 	}
