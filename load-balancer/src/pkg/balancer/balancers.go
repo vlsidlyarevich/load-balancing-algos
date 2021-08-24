@@ -18,7 +18,7 @@ type RoundRobinLoadBalancer struct {
 func NewRoundRobinLoadBalancer() *RoundRobinLoadBalancer {
 	return &RoundRobinLoadBalancer{
 		servers:         getServers(),
-		lastServedIndex: -1,
+		lastServedIndex: 0,
 	}
 }
 

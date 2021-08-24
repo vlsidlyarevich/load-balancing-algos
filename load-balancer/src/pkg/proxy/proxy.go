@@ -26,8 +26,8 @@ func proxyRequest(p *HelloProxy) http.HandlerFunc {
 	server := p.lb.NextServer()
 
 	return func(rw http.ResponseWriter, req *http.Request) {
-		log.Println("Proxying request", req.Method, req.RequestURI, req.Body)
-		log.Println("Selected application", server)
+		log.Println("Proxying request:", req.Method, req.RequestURI, req.Body)
+		log.Println("Selected server:", server)
 		server.ServeRequest(rw, req)
 	}
 }

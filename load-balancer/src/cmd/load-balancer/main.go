@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	var serv = application.NewApplication(":8082")
+	var serv = application.NewApplication(":8080")
 
 	serv.RouteHandler(proxy.HelloBalancedProxy())
 

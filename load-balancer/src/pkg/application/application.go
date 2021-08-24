@@ -26,6 +26,6 @@ func (s *Application) Start() error {
 }
 
 func (s *Application) RouteHandler(h RouteHandler) {
-	log.Println("Registering RouteHandler", h)
+	log.Printf("Registering RouteHandler %+v\n", h)
 	h.RegisterRoutes(s)
 }

@@ -1,6 +1,7 @@
 package balancer
 
 import (
+	"fmt"
 	"net/http"
 	"net/http/httputil"
 	"net/url"
@@ -10,6 +11,10 @@ type Server struct {
 	url     *url.URL
 	isAlive bool
 	rProxy  *httputil.ReverseProxy
+}
+
+func (s Server) String() string {
+	return fmt.Sprintf("Server url: %s, isAlive: %t", s.url, s.isAlive)
 }
 
 func (s Server) ServeRequest(rw http.ResponseWriter, req *http.Request) {
