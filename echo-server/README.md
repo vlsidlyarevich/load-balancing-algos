@@ -27,7 +27,7 @@ Docker:
 Docker version 20.10.7, build f0df350
 ```
 
-### Installing
+### Installation
 
 * Clone the project and open in your favourite IDE.
 * Install all needed dependencies via `go mod download` or via IDE tools.
@@ -37,4 +37,5 @@ Docker version 20.10.7, build f0df350
 ## Running
 
 * Run [main.go](src/cmd/echo-server/main.go)
-* Run containerized `docker run -p 8081:8081 echo-server`
+* Run containerized `docker run -p port:port echo-server`
+* 

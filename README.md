@@ -1,7 +1,9 @@
 # load-balancing-algos
-Load-balancing algos implementation.
 
-## Algorithms used:
+Load-balancing algos implementation written in Golang.
+
+## Algorithms presented:
+
 * Round-robin
 * Weighted round-robin (TBD)
 * Least Connection (TBD)
@@ -11,8 +13,28 @@ Load-balancing algos implementation.
 * URL Hash (TBD)
 
 ## Components
+
 * [Echo-server](echo-server/README.md)
 * [Load-balancer](load-balancer/README.md)
+
+## Installation and running
+
+* Setup Docker images in your local hub (TBD .sh here)
+* Run via compose: `docker-compose up`
+* Switch over algorithms used via `curl -X POST http://127.0.0.1:8080/lb/switch?type=TYPE` where `TYPE` is presented in
+  the table below:
+
+| Name  | Parameter |
+| ------------- | ------------- |
+| Round-robin  | round_robin  |
+| Weighted round-robin  | weighted_round_robin  |
+| Least Connection  | least_connection  |
+| Fixed Weighting  | fixed_weighting  |
+| Weighted Response Time  | weighted_response  |
+| Source IP Hash  | ip_hash  |
+| URL Hash  | url_hash  |
+
+* Test via executing `curl -X GET http://127.0.0.1:8080/hello`
 
 ## Authors
 
