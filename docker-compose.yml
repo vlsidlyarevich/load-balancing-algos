@@ -1,0 +1,6 @@
+version: "3.9"
+services:
+  echo-server-0:
+    image: "echo-server:latest"
+    ports:
+      - "8070:8070"
