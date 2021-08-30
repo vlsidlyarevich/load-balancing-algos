@@ -18,6 +18,9 @@ RUN go mod verify
 # Build the application
 RUN go build -o main ./cmd/echo-server
 
+# Copy the configuration files into propper location
+RUN cp -R conf /opt/echo-server
+
 ## Move to /dist directory as the place for resulting binary folder
 WORKDIR /dist
 
@@ -28,4 +31,4 @@ RUN cp /build/main .
 EXPOSE 8081
 
 # Command to run when starting the container
-CMD ["/dist/main"]
+CMD ["/dist/main", "/opt/echo-server/config.toml"]

@@ -13,11 +13,13 @@ const DefaultConfigPath = "conf/config.toml"
 func main() {
 	var args = os.Args[1:]
 	log.Println("Arguments used:", args)
+
 	var configPath = DefaultConfigPath
 	if len(args) > 0 && args[0] != "" {
 		configPath = args[0]
 	}
 	var config = LoadConfig(configPath)
+
 	var server = NewServer(config.Server.Port, config.Server.Id)
 	log.Fatal(server.Start())
 }
