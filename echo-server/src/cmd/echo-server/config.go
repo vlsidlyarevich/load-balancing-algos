@@ -19,6 +19,7 @@ func LoadConfig(path string) *Config {
 	if path == "" {
 		log.Panicf("Invalid config path!")
 	}
+	log.Println("Loading config from path:", path)
 
 	var config Config
 	if _, err := toml.DecodeFile(path, &config); err != nil {
