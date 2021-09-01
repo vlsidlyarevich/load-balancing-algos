@@ -2,5 +2,8 @@ version: "3.9"
 services:
   echo-server-0:
     image: "echo-server:latest"
+    environment:
+      - ECHO_SERVER_PORT=${ECHO_SERVER_PORT_1}
+      - ECHO_SERVER_ID=${ECHO_SERVER_ID_1}
     ports:
-      - "8070:8070"
+      - "${ECHO_SERVER_PORT_1}:${ECHO_SERVER_PORT_1}"

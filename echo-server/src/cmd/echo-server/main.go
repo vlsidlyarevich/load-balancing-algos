@@ -20,7 +20,7 @@ func main() {
 	}
 	var config = LoadConfig(configPath)
 
-	var server = NewServer(config.Server.Port, config.Server.Id)
+	var server = NewServer(":"+config.Server.Port, config.Server.Id)
 	log.Fatal(server.Start())
 }
 
