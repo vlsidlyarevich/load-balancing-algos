@@ -11,12 +11,18 @@ type RouteHandler interface {
 }
 
 type Application struct {
+	Env    Environment
 	Port   string
 	Router *mux.Router
 }
 
-func NewApplication(port string) *Application {
-	s := Application{port, mux.NewRouter()}
+type Environment struct {
+	Args       []string
+	ConfigPath string
+}
+
+func NewApplication(port string, args []string, configPath string) *Application {
+	s := Application{Environment{Args: args, ConfigPath: configPath}, port, mux.NewRouter()}
 	return &s
 }
 

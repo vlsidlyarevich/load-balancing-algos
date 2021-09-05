@@ -7,9 +7,9 @@ import (
 	"net/http"
 )
 
-func HelloBalancedProxy() *HelloProxy {
+func HelloBalancedProxy(e application.Environment) *HelloProxy {
 	return &HelloProxy{
-		lb: server.NewRoundRobinLoadBalancer(),
+		lb: server.SelectLoadBalancer(e),
 	}
 }
 

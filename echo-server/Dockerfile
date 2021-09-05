@@ -1,6 +1,6 @@
 FROM golang:1.15-alpine
 
-# Set necessary environment variables needed for our image
+# Set necessary environment.go variables needed for our image
 ENV GO111MODULE=on \
     CGO_ENABLED=0 \
     GOOS=linux \

@@ -1,9 +1,34 @@
 version: "3.9"
 services:
-  echo-server-0:
+
+  load-balancer:
+    image: "load-balancer:latest"
+    environment:
+      - LOAD_BALANCER_SERVER_LIST=[
+        "http://127.0.0.1:${ECHO_SERVER_PORT_1}",
+        "http://127.0.0.1:${ECHO_SERVER_PORT_2}",
+        "http://127.0.0.1:${ECHO_SERVER_PORT_3}"]
+    ports:
+      - "8080:8080"
+
+  echo-server-1:
     image: "echo-server:latest"
     environment:
       - ECHO_SERVER_PORT=${ECHO_SERVER_PORT_1}
       - ECHO_SERVER_ID=${ECHO_SERVER_ID_1}
     ports:
       - "${ECHO_SERVER_PORT_1}:${ECHO_SERVER_PORT_1}"
+  echo-server-2:
+    image: "echo-server:latest"
+    environment:
+      - ECHO_SERVER_PORT=${ECHO_SERVER_PORT_2}
+      - ECHO_SERVER_ID=${ECHO_SERVER_ID_2}
+    ports:
+      - "${ECHO_SERVER_PORT_2}:${ECHO_SERVER_PORT_2}"
+  echo-server-3:
+    image: "echo-server:latest"
+    environment:
+      - ECHO_SERVER_PORT=${ECHO_SERVER_PORT_3}
+      - ECHO_SERVER_ID=${ECHO_SERVER_ID_3}
+    ports:
+      - "${ECHO_SERVER_PORT_3}:${ECHO_SERVER_PORT_3}"

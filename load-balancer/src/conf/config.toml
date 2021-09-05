@@ -2,6 +2,7 @@
 
 title = "Load-balancer config"
 
+[discovery]
 servers = [
     "http://127.0.0.1:8070",
     "http://127.0.0.1:8071",

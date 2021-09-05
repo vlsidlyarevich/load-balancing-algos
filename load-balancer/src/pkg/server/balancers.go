@@ -1,6 +1,7 @@
 package server
 
 import (
+	"github.com/vlsidlyarevich/load-balancer/pkg/application"
 	"sync"
 )
 
@@ -15,9 +16,13 @@ type RoundRobinLoadBalancer struct {
 	mutex sync.Mutex
 }
 
-func NewRoundRobinLoadBalancer() *RoundRobinLoadBalancer {
+func SelectLoadBalancer(e application.Environment) LoadBalancer {
+	return newRoundRobinLoadBalancer(e)
+}
+
+func newRoundRobinLoadBalancer(e application.Environment) *RoundRobinLoadBalancer {
 	return &RoundRobinLoadBalancer{
-		discovery:       NewConfigBasedDiscovery(),
+		discovery:       NewConfigBasedDiscovery(e.ConfigPath),
 		lastServedIndex: 0,
 	}
 }
@@ -25,6 +30,7 @@ func NewRoundRobinLoadBalancer() *RoundRobinLoadBalancer {
 func (lb *RoundRobinLoadBalancer) NextServer() *Server {
 	lb.mutex.Lock()
 	servers := lb.discovery.ServerList()
+	println(servers)
 
 	if lb.lastServedIndex >= len(servers) {
 		lb.lastServedIndex = 0
