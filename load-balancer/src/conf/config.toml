@@ -1,0 +1,9 @@
+# Echo-server configuration
+
+title = "Load-balancer config"
+
+servers = [
+    "http://127.0.0.1:8070",
+    "http://127.0.0.1:8071",
+    "http://127.0.0.1:8072"
+]

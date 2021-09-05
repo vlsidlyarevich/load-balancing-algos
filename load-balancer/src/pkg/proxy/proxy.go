@@ -2,19 +2,19 @@ package proxy
 
 import (
 	"github.com/vlsidlyarevich/load-balancer/pkg/application"
-	"github.com/vlsidlyarevich/load-balancer/pkg/balancer"
+	"github.com/vlsidlyarevich/load-balancer/pkg/server"
 	"log"
 	"net/http"
 )
 
 func HelloBalancedProxy() *HelloProxy {
 	return &HelloProxy{
-		lb: balancer.NewRoundRobinLoadBalancer(),
+		lb: server.NewRoundRobinLoadBalancer(),
 	}
 }
 
 type HelloProxy struct {
-	lb balancer.LoadBalancer
+	lb server.LoadBalancer
 }
 
 func (p *HelloProxy) RegisterRoutes(s *application.Application) {

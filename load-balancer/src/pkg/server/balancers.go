@@ -1,4 +1,4 @@
-package balancer
+package server
 
 import (
 	"sync"
@@ -9,7 +9,7 @@ type LoadBalancer interface {
 }
 
 type RoundRobinLoadBalancer struct {
-	servers         []*Server
+	discovery       Discovery
 	lastServedIndex int
 	//Mutex for locking NextServer
 	mutex sync.Mutex
@@ -17,29 +17,22 @@ type RoundRobinLoadBalancer struct {
 
 func NewRoundRobinLoadBalancer() *RoundRobinLoadBalancer {
 	return &RoundRobinLoadBalancer{
-		servers:         getServers(),
+		discovery:       NewConfigBasedDiscovery(),
 		lastServedIndex: 0,
 	}
 }
 
 func (lb *RoundRobinLoadBalancer) NextServer() *Server {
 	lb.mutex.Lock()
+	servers := lb.discovery.ServerList()
 
-	if lb.lastServedIndex >= len(lb.servers) {
+	if lb.lastServedIndex >= len(servers) {
 		lb.lastServedIndex = 0
 	}
-	server := lb.servers[lb.lastServedIndex]
+	server := servers[lb.lastServedIndex]
 	lb.lastServedIndex++
 
 	defer lb.mutex.Unlock()
 
 	return server
-}
-
-func getServers() []*Server {
-	return []*Server{
-		newServer("http://127.0.0.1:8081"),
-		newServer("http://127.0.0.1:8082"),
-		newServer("http://127.0.0.1:8083"),
-	}
 }
