@@ -19,8 +19,8 @@ Load-balancing algos implementation written in Golang.
 
 ## Installation and running
 
-* Setup Docker images in your local hub (TBD .sh here)
-* Run via compose: `docker-compose up`
+* Setup Docker images in your local hub - run `./build-images.sh`
+* Run 3 echo-servers and 1 lb: `docker-compose up`
 * Switch over algorithms used via `curl -X POST http://127.0.0.1:8080/lb/switch?type=TYPE` where `TYPE` is presented in
   the table below:
 
