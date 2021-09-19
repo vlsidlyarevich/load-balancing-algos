@@ -11,6 +11,7 @@ type Server struct {
 	url     *url.URL
 	isAlive bool
 	rProxy  *httputil.ReverseProxy
+	weight  int
 }
 
 func (s Server) String() string {

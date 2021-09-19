@@ -3,8 +3,14 @@
 title = "Load-balancer config"
 
 [discovery]
-servers = [
-    "http://127.0.0.1:8070",
-    "http://127.0.0.1:8071",
-    "http://127.0.0.1:8072"
-]
+[[servers]]
+ip = "http://127.0.0.1:8070"
+weight = 5
+
+[[servers]]
+ip = "http://127.0.0.1:8071"
+weight = 3
+
+[[servers]]
+ip = "http://127.0.0.1:8072"
+weight = 1

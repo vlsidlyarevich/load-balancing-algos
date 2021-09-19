@@ -18,6 +18,7 @@ type config struct {
 	discovery discoveryConf
 }
 
+//TODO read weight from config
 type discoveryConf struct {
 	servers []string `validate:"required" envconfig:"LOAD_BALANCER_SERVER_LIST"`
 }
