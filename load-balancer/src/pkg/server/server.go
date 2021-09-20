@@ -22,12 +22,13 @@ func (s Server) ServeRequest(rw http.ResponseWriter, req *http.Request) {
 	s.rProxy.ServeHTTP(rw, req)
 }
 
-func newServer(rawurl string) *Server {
+func newServer(rawurl string, weight int) *Server {
 	parsedUrl, _ := url.Parse(rawurl)
 
 	return &Server{
 		url:     parsedUrl,
 		isAlive: true,
 		rProxy:  httputil.NewSingleHostReverseProxy(parsedUrl),
+		weight:  weight,
 	}
 }

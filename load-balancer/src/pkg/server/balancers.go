@@ -2,7 +2,6 @@ package server
 
 import (
 	"github.com/vlsidlyarevich/load-balancer/pkg/application"
-	"math/rand"
 	"sync"
 )
 
@@ -50,7 +49,8 @@ func (lb *RoundRobinLoadBalancer) NextServer() *Server {
 	return server
 }
 
-func (lb *WeightedRoundRobinLoadBalancer) NextServer() *Server {
-	//TODO random number max to sum of weights
-	//Calculate boundaries and return
-}
+//
+//func (lb *WeightedRoundRobinLoadBalancer) NextServer() *Server {
+//	//TODO random number max to sum of weights
+//	//Calculate boundaries and return
+//}

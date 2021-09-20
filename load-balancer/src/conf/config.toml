@@ -2,15 +2,14 @@
 
 title = "Load-balancer config"
 
-[discovery]
-[[servers]]
+[[discovery.servers]]
 ip = "http://127.0.0.1:8070"
 weight = 5
 
-[[servers]]
+[[discovery.servers]]
 ip = "http://127.0.0.1:8071"
 weight = 3
 
-[[servers]]
+[[discovery.servers]]
 ip = "http://127.0.0.1:8072"
 weight = 1

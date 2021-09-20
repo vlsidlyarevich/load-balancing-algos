@@ -5,9 +5,9 @@ services:
     image: "load-balancer:latest"
     environment:
       - LOAD_BALANCER_SERVER_LIST=[
-        "http://127.0.0.1:${ECHO_SERVER_PORT_1}",
-        "http://127.0.0.1:${ECHO_SERVER_PORT_2}",
-        "http://127.0.0.1:${ECHO_SERVER_PORT_3}"]
+        {"ip":"http://127.0.0.1:${ECHO_SERVER_PORT_1}", "weight":5},
+        {"ip":"http://127.0.0.1:${ECHO_SERVER_PORT_2}", "weight":3},
+        {"ip":"http://127.0.0.1:${ECHO_SERVER_PORT_3}", "weight":1}]
     ports:
       - "8080:8080"
 
